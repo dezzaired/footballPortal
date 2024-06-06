@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Big Data w Piłce Nożnej{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .navbar {
+            background-color: #343a40 !important;
+        }
+        .navbar-brand, .nav-link {
+            color: #ffffff !important;
+        }
+        .nav-link:hover {
+            color: #d4d4d4 !important;
+        }
+        .container {
+            margin-top: 20px;
+            flex: 1;
+        }
+        h1 {
+            color: #343a40;
+        }
+        p {
+            color: #6c757d;
+        }
+        .jumbotron {
+            background-color: #ffffff;
+            padding: 2rem 1rem;
+            border-radius: 0.3rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+        .jumbotron h1 {
+            color: #343a40;
+        }
+        .jumbotron p {
+            color: #6c757d;
+        }
+        .jumbotron .btn {
+            background-color: #343a40;
+            border: none;
+        }
+        .jumbotron .btn:hover {
+            background-color: #495057;
+        }
+        #about img {
+            max-width: 100%;
+            height: auto;
+        }
+        .card-title {
+            color: #343a40;
+        }
+        .card-text {
+            color: #6c757d;
+        }
+        #contact .form-control {
+            margin-bottom: 1rem;
+        }
+        footer {
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="{{ path('home') }}">Big Data w Piłce Nożnej</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('match_analysis') }}">Analiza Meczów</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('player_analysis') }}">Analiza Zawodników</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('news') }}">Aktualności</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container mt-4">
+    {% block body %}{% endblock %}
+</div>
+<footer>
+    <p>&copy; 2024 Big Data w Piłce Nożnej. Wszelkie prawa zastrzeżone.</p>
+</footer>
+</body>
+</html>

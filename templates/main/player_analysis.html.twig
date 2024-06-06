@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Analiza Zawodników{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Analiza Zawodników</h1>
+        <p>Poniżej znajdują się szczegółowe statystyki wybranych zawodników.</p>
+
+        <hr class="my-4">
+
+        <section id="player_statistics">
+            <h2 class="mb-4">Statystyki Zawodników</h2>
+            <div id="player-data" class="list-group mb-4">
+                <!-- Dane zawodników -->
+                <div class="list-group-item">
+                    <h5 class="mb-1">Lionel Messi</h5>
+                    <p class="mb-1"><strong>Wiek:</strong> 34</p>
+                    <p class="mb-1"><strong>Pozycja:</strong> Napastnik</p>
+                    <p class="mb-1"><strong>Gole:</strong> 30</p>
+                    <p class="mb-1"><strong>Asysty:</strong> 12</p>
+                    <p class="mb-1"><strong>Podania:</strong> 1200</p>
+                    <p class="mb-1"><strong>Przechwyty:</strong> 50</p>
+                </div>
+                <div class="list-group-item">
+                    <h5 class="mb-1">Cristiano Ronaldo</h5>
+                    <p class="mb-1"><strong>Wiek:</strong> 36</p>
+                    <p class="mb-1"><strong>Pozycja:</strong> Napastnik</p>
+                    <p class="mb-1"><strong>Gole:</strong> 28</p>
+                    <p class="mb-1"><strong>Asysty:</strong> 10</p>
+                    <p class="mb-1"><strong>Podania:</strong> 1100</p>
+                    <p class="mb-1"><strong>Przechwyty:</strong> 45</p>
+                </div>
+                <div class="list-group-item">
+                    <h5 class="mb-1">Robert Lewandowski</h5>
+                    <p class="mb-1"><strong>Wiek:</strong> 33</p>
+                    <p class="mb-1"><strong>Pozycja:</strong> Napastnik</p>
+                    <p class="mb-1"><strong>Gole:</strong> 35</p>
+                    <p class="mb-1"><strong>Asysty:</strong> 8</p>
+                    <p class="mb-1"><strong>Podania:</strong> 1000</p>
+                    <p class="mb-1"><strong>Przechwyty:</strong> 30</p>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

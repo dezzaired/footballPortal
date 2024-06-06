@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "chart.js": "^4.4.3"
+  },
+  "devDependencies": {
+    "@symfony/webpack-encore": "^4.6.1"
+  }
+}

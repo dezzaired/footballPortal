@@ -32,5 +32,10 @@ class MainController extends AbstractController
     {
         return $this->render('main/news.html.twig');
     }
+    #[Route('/data-charts', name: 'data_charts')]
+    public function dataCharts(): Response
+    {
+        return $this->render('main/data_charts.html.twig');
+    }
 }
 

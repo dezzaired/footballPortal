@@ -1,11 +1,14 @@
 <?php
 
+// eb461407e359e0517cce14867f55f346
 // src/Controller/MainController.php
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpClient\HttpClient;
 
 class MainController extends AbstractController
 {
@@ -16,13 +19,52 @@ class MainController extends AbstractController
     }
 
     #[Route('/match-analysis', name: 'match_analysis')]
-    public function matchAnalysis(): Response
+    public function matchAnalysis(Request $request): Response
     {
-        return $this->render('main/match_analysis.html.twig');
+        $teamId = $request->query->get('team', '33');  // Default to team ID 33
+        $season = $request->query->get('season', '2019');  // Default to season 2019
+        $leagueId = $request->query->get('league', '39');  // Default to league ID 39
+
+        $client = HttpClient::create();
+        $response = $client->request('GET', 'https://v3.football.api-sports.io/teams/statistics', [
+            'headers' => [
+                'x-rapidapi-host' => 'v3.football.api-sports.io',
+                'x-rapidapi-key' => 'eb461407e359e0517cce14867f55f346'
+            ],
+            'query' => [
+                'season' => $season,
+                'team' => $teamId,
+                'league' => $leagueId
+            ]
+        ]);
+
+        $data = $response->toArray();
+
+        // Pobranie nazwy drużyny
+        $teamResponse = $client->request('GET', 'https://v3.football.api-sports.io/teams', [
+            'headers' => [
+                'x-rapidapi-host' => 'v3.football.api-sports.io',
+                'x-rapidapi-key' => 'eb461407e359e0517cce14867f55f346'
+            ],
+            'query' => [
+                'id' => $teamId
+            ]
+        ]);
+
+        $teamData = $teamResponse->toArray();
+        $teamName = $teamData['response'][0]['team']['name'];
+
+        return $this->render('main/match_analysis.html.twig', [
+            'statistics' => $data,
+            'teamId' => $teamId,
+            'teamName' => $teamName,
+            'season' => $season,
+            'leagueId' => $leagueId
+        ]);
     }
 
-    #[Route('/player-training', name: 'player_analysis')]
-    public function playerTraining(): Response
+    #[Route('/player-analysis', name: 'player_analysis')]
+    public function playerAnalysis(): Response
     {
         return $this->render('main/player_analysis.html.twig');
     }
@@ -32,10 +74,18 @@ class MainController extends AbstractController
     {
         return $this->render('main/news.html.twig');
     }
+
     #[Route('/data-charts', name: 'data_charts')]
     public function dataCharts(): Response
     {
         return $this->render('main/data_charts.html.twig');
     }
 }
+
+
+
+
+
+
+
 

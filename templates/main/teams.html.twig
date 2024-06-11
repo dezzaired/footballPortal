@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista Drużyn{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Lista Drużyn</h1>
+        <p>Lista drużyn i ich ID pobrana z API.</p>
+
+        <hr class="my-4">
+
+        <section id="team_list">
+            <h3>Liga ID: {{ leagueId }}, Sezon: {{ season }}</h3>
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nazwa Drużyny</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for team in teams.response %}
+                    <tr>
+                        <td>{{ team.team.id }}</td>
+                        <td>{{ team.team.name }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .table {
+            text-align: center;
+            font-size: 14px;
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
+    </style>
+{% endblock %}

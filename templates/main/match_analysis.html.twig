@@ -26,6 +26,8 @@
             </div>
         </form>
 
+        <a href="{{ path('teams', {'league': leagueId, 'season': season}) }}" class="btn btn-secondary mb-4">Pokaż listę drużyn</a>
+
         <section id="team_statistics">
             <h3>{{ teamName }} (ID: {{ teamId }}), Sezon: {{ season }}</h3>
             <table class="table table-bordered table-hover">

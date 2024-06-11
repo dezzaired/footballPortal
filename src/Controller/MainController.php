@@ -80,7 +80,35 @@ class MainController extends AbstractController
     {
         return $this->render('main/data_charts.html.twig');
     }
+
+    #[Route('/teams', name: 'teams')]
+    public function teams(Request $request): Response
+    {
+        $leagueId = $request->query->get('league', '39');  // Default to league ID 39
+        $season = $request->query->get('season', '2019');  // Default to season 2019
+
+        $client = HttpClient::create();
+        $response = $client->request('GET', 'https://v3.football.api-sports.io/teams', [
+            'headers' => [
+                'x-rapidapi-host' => 'v3.football.api-sports.io',
+                'x-rapidapi-key' => 'eb461407e359e0517cce14867f55f346'
+            ],
+            'query' => [
+                'league' => $leagueId,
+                'season' => $season
+            ]
+        ]);
+
+        $teams = $response->toArray();
+
+        return $this->render('main/teams.html.twig', [
+            'teams' => $teams,
+            'leagueId' => $leagueId,
+            'season' => $season
+        ]);
+    }
 }
+
 
 
 

@@ -1,7 +1,6 @@
 <?php
 
 // eb461407e359e0517cce14867f55f346
-// src/Controller/MainController.php
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -64,9 +63,30 @@ class MainController extends AbstractController
     }
 
     #[Route('/player-analysis', name: 'player_analysis')]
-    public function playerAnalysis(): Response
+    public function playerAnalysis(Request $request): Response
     {
-        return $this->render('main/player_analysis.html.twig');
+        $season = $request->query->get('season', '2018');  // Domyślny sezon
+        $leagueId = $request->query->get('league', '39');  // Domyślny ID ligi
+
+        $client = HttpClient::create();
+        $response = $client->request('GET', 'https://v3.football.api-sports.io/players/topscorers', [
+            'headers' => [
+                'x-rapidapi-host' => 'v3.football.api-sports.io',
+                'x-rapidapi-key' => 'eb461407e359e0517cce14867f55f346'
+            ],
+            'query' => [
+                'season' => $season,
+                'league' => $leagueId
+            ]
+        ]);
+
+        $data = $response->toArray();
+
+        return $this->render('main/player_analysis.html.twig', [
+            'scorers' => $data['response'],
+            'season' => $season,
+            'leagueId' => $leagueId
+        ]);
     }
 
     #[Route('/news', name: 'news')]
@@ -108,12 +128,4 @@ class MainController extends AbstractController
         ]);
     }
 }
-
-
-
-
-
-
-
-
 

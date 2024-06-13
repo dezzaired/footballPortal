@@ -1,46 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Analiza Zawodników{% endblock %}
+{% block title %}Topowi Strzelcy{% endblock %}
 
 {% block body %}
-    <div class="container mt-4">
-        <h1>Analiza Zawodników</h1>
-        <p>Poniżej znajdują się szczegółowe statystyki wybranych zawodników.</p>
+    <div class="container">
+        <h1 class="my-4">Topowi Strzelcy w Sezonie {{ season }}</h1>
 
-        <hr class="my-4">
-
-        <section id="player_statistics">
-            <h2 class="mb-4">Statystyki Zawodników</h2>
-            <div id="player-data" class="list-group mb-4">
-                <!-- Dane zawodników -->
-                <div class="list-group-item">
-                    <h5 class="mb-1">Lionel Messi</h5>
-                    <p class="mb-1"><strong>Wiek:</strong> 34</p>
-                    <p class="mb-1"><strong>Pozycja:</strong> Napastnik</p>
-                    <p class="mb-1"><strong>Gole:</strong> 30</p>
-                    <p class="mb-1"><strong>Asysty:</strong> 12</p>
-                    <p class="mb-1"><strong>Podania:</strong> 1200</p>
-                    <p class="mb-1"><strong>Przechwyty:</strong> 50</p>
+        <form method="get" action="{{ path('player_analysis') }}" class="mb-4">
+            <div class="form-row">
+                <div class="col">
+                    <label for="season">Sezon</label>
+                    <select name="season" id="season" class="form-control">
+                        {% for year in 2018..2023 %}
+                            <option value="{{ year }}" {% if season == year %}selected{% endif %}>{{ year }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
-                <div class="list-group-item">
-                    <h5 class="mb-1">Cristiano Ronaldo</h5>
-                    <p class="mb-1"><strong>Wiek:</strong> 36</p>
-                    <p class="mb-1"><strong>Pozycja:</strong> Napastnik</p>
-                    <p class="mb-1"><strong>Gole:</strong> 28</p>
-                    <p class="mb-1"><strong>Asysty:</strong> 10</p>
-                    <p class="mb-1"><strong>Podania:</strong> 1100</p>
-                    <p class="mb-1"><strong>Przechwyty:</strong> 45</p>
-                </div>
-                <div class="list-group-item">
-                    <h5 class="mb-1">Robert Lewandowski</h5>
-                    <p class="mb-1"><strong>Wiek:</strong> 33</p>
-                    <p class="mb-1"><strong>Pozycja:</strong> Napastnik</p>
-                    <p class="mb-1"><strong>Gole:</strong> 35</p>
-                    <p class="mb-1"><strong>Asysty:</strong> 8</p>
-                    <p class="mb-1"><strong>Podania:</strong> 1000</p>
-                    <p class="mb-1"><strong>Przechwyty:</strong> 30</p>
+                <div class="col">
+                    <label for="league">Liga</label>
+                    <select name="league" id="league" class="form-control">
+                        <option value="39" {% if leagueId == 39 %}selected{% endif %}>Premier League</option>
+                        <option value="135" {% if leagueId == 135 %}selected{% endif %}>Serie A</option>
+                        <option value="140" {% if leagueId == 140 %}selected{% endif %}>La Liga</option>
+                        <option value="61" {% if leagueId == 61 %}selected{% endif %}>Ligue 1</option>
+                    </select>
                 </div>
             </div>
-        </section>
+            <button type="submit" class="btn btn-primary mt-3">Pobierz Strzelców</button>
+        </form>
+
+        <div class="list-group">
+            {% for scorer in scorers %}
+                <a href="#" class="list-group-item list-group-item-action d-flex align-items-center">
+                    <img src="{{ scorer.player.photo }}" alt="{{ scorer.player.name }}" class="img-thumbnail" style="width: 50px; height: 50px; margin-right: 15px;">
+                    <div>
+                        <h5 class="mb-1">{{ scorer.player.name }}</h5>
+                        <p class="mb-1">Bramki: {{ scorer.statistics[0].goals.total }}</p>
+                        <small>{{ scorer.statistics[0].team.name }}</small>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

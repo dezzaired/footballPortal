@@ -1,6 +1,5 @@
 <?php
 
-// eb461407e359e0517cce14867f55f346
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,7 +27,7 @@ class MainController extends AbstractController
         $response = $client->request('GET', 'https://v3.football.api-sports.io/teams/statistics', [
             'headers' => [
                 'x-rapidapi-host' => 'v3.football.api-sports.io',
-                'x-rapidapi-key' => 'eb461407e359e0517cce14867f55f346'
+                'x-rapidapi-key' => 'API key here'
             ],
             'query' => [
                 'season' => $season,
@@ -43,7 +42,7 @@ class MainController extends AbstractController
         $teamResponse = $client->request('GET', 'https://v3.football.api-sports.io/teams', [
             'headers' => [
                 'x-rapidapi-host' => 'v3.football.api-sports.io',
-                'x-rapidapi-key' => 'eb461407e359e0517cce14867f55f346'
+                'x-rapidapi-key' => 'API key here'
             ],
             'query' => [
                 'id' => $teamId
@@ -72,7 +71,7 @@ class MainController extends AbstractController
         $response = $client->request('GET', 'https://v3.football.api-sports.io/players/topscorers', [
             'headers' => [
                 'x-rapidapi-host' => 'v3.football.api-sports.io',
-                'x-rapidapi-key' => 'eb461407e359e0517cce14867f55f346'
+                'x-rapidapi-key' => 'API key here'
             ],
             'query' => [
                 'season' => $season,
@@ -111,7 +110,7 @@ class MainController extends AbstractController
         $response = $client->request('GET', 'https://v3.football.api-sports.io/teams', [
             'headers' => [
                 'x-rapidapi-host' => 'v3.football.api-sports.io',
-                'x-rapidapi-key' => 'eb461407e359e0517cce14867f55f346'
+                'x-rapidapi-key' => 'API key here'
             ],
             'query' => [
                 'league' => $leagueId,
